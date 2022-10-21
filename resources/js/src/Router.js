@@ -1,7 +1,8 @@
 import VueRouter from 'vue-router'
 import Vue from 'vue'
-import CarListComptwont from '../comptwonts/CarListComptwont.vue'
-import Form from '../comptwonts/CarForm.vue'
+import CarListComponent from '../components/CarListComponent.vue'
+import CreateForm from '../components/CreateForm.vue'
+import EditForm from '../components/EditForm.vue'
 
 Vue.use(VueRouter)
 
@@ -11,12 +12,17 @@ export default new VueRouter({
     {
       path: '/',
       name: 'list',
-      comptwont: CarListComptwont
+      component: CarListComponent
     },
     {
       path: '/create',
       name: 'create',
-      comptwont: Form
+      component: CreateForm
+    },
+    {
+      path: '/edit',
+      name: 'edit',
+      component: EditForm
     }
   ]
 })
