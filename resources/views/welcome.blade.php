@@ -16,12 +16,8 @@
 
 <body>
     <div class="main-wrapper">
-        <div id="app">
-            <navbar></navbar>
-            <router-view></router-view>
-        </div>
+        <div id="app"></div>
     </div>
 </body>
 <script src="/js/app.js"></script>
-
 </html>

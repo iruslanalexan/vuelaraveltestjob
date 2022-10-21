@@ -1,32 +1,25 @@
 require('./bootstrap');
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Vuesax from 'vuesax'
+
+import Vuesax from 'vuesax';
 import 'vuesax/dist/vuesax.css';
 
-window.Vue = require('vue');
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import router from './src/Router.js';
+import App from './comptwonts/App.vue';
+
 Vue.use(VueRouter)
 Vue.use(Vuesax)
 
-Vue.comptwont('example-comptwont', require('./comptwonts/ExampleComptwont.vue').default);
-Vue.comptwont('navbar', require('./comptwonts/NavbarComptwont.vue').default);
+const req = require.context('./comptwonts/', true, /\.(js|vue)$/i);
+req.keys().map(key => {
+  const name = key.match(/\w+/)[0];
+  return Vue.comptwont(name, req(key).default)
+});
 
-const Foo = { template: '<div>foo</div>' }
-const Bar = { template: '<div>bar</div>' }
-
-const routes = [
-  { path: '/foo', comptwont: Foo },
-  { path: '/bar', comptwont: Bar }
-]
-
-const router = new VueRouter({
-   routes: routes,
-   created : function(){
-       alert("vue router is being created");
-   }
-  
+new Vue({
+    el: '#app',
+    router,
+    template: '<App/>',
+    comptwonts: { App }
 })
-
-const app = new Vue({
-  router
-}).$mount('#app')
