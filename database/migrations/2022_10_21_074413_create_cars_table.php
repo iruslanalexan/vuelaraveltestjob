@@ -16,14 +16,14 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('pub_year');
+            $table->integer('pub_year');
             $table->string('engine_volume');
             $table->string('engine_number');
             //$table->string('color_id'); -> colors many to many table: car_colors
-            $table->binary('image');
+            $table->string('image');
             $table->string('description');
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.

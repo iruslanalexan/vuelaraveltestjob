@@ -17,8 +17,15 @@ class CarColors extends Migration
             $table->id();
             $table->string('name');
         });
-    }
 
+        $colors = ['Белый','Черный','Серебристый','Темно-серый','Красный','Синий','Коричневый','Желтый'];
+        foreach($colors as $color){
+            $c = new \App\CarColor();
+            $c->name = $color;
+            $c->save();
+        }
+    }
+    
     /**
      * Reverse the migrations.
      *

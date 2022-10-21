@@ -18,8 +18,8 @@ class CreateCarsColors extends Migration
             $table->unsignedBigInteger('car_id');
             $table->unsignedBigInteger('color_id');
 
-            $table->foreign('car_id')->references('id')->on('cars');
-            $table->foreign('color_id')->references('id')->on('car_colors');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');;
+            $table->foreign('color_id')->references('id')->on('car_colors')->onDelete('cascade');;
         });
     }
 
