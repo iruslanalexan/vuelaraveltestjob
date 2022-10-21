@@ -8,6 +8,9 @@ import VueRouter from 'vue-router';
 import router from './src/Router.js';
 import App from './comptwonts/App.vue';
 
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
 Vue.use(VueRouter)
 Vue.use(Vuesax)
 

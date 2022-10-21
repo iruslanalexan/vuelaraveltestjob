@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router'
 import Vue from 'vue'
 import CarListComptwont from '../comptwonts/CarListComptwont.vue'
+import Form from '../comptwonts/CarForm.vue'
 
 Vue.use(VueRouter)
 
@@ -15,10 +16,7 @@ export default new VueRouter({
     {
       path: '/create',
       name: 'create',
-      comptwont: Vue.comptwont('asdf', {
-        props: ['todo'],
-        template: '<li>This is comptwont</li>'
-      })
+      comptwont: Form
     }
   ]
 })
