@@ -15,7 +15,7 @@
             <p>Цвета :  {{ getColors }} </p>
             <p>Описание {{car.description}}</p>
             <b-button-group class="btn-group">
-                <b-button variant="primary">Редактировать</b-button>
+                <b-button v-on:click="onEditCar" variant="primary">Редактировать</b-button>
                 <b-button v-on:click="emitDeleteEvent">Удалить</b-button>
             </b-button-group>
         </div>
@@ -30,6 +30,9 @@ export default {
         emitDeleteEvent() {
             console.log('emitDeleteEvent');
             this.$emit('remove',this.car.id);
+        },
+        onEditCar() {
+            this.$router.push(`/edit/${this.car.id}`)
         }
     },
     computed : {

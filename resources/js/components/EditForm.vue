@@ -5,7 +5,7 @@
               <h3>Редактирование записи автомобиля:</h3>
               <b-container>
                 <b-form ref="v-form">
-                    <b-form-row>  
+                    <b-form-row>
 
                         <b-col>
                             <b-form-group  label="Название модели:" label-for="input-1">
@@ -20,7 +20,7 @@
 
                     </b-form-row>
 
-                    <b-form-row>  
+                    <b-form-row>
 
                         <b-col>
                             <b-form-group  label="Номер двигателя:" label-for="input-1">
@@ -58,6 +58,9 @@
 
                     <vs-divider />
                     <vs-button color="primary" type="filled" v-on:click="submit">Создать</vs-button>
+                    <b-alert v-if="show_sucess" variant="success" show>Запись успешно сохранена!</b-alert>
+
+                    <vs-button color="primary" type="filled" v-on:click="submit">Редактировать</vs-button>
                 </b-form>
               </b-container>
 
@@ -82,33 +85,38 @@ export default {
         };
         return {
             'form': form_fields,
-            'color_options' : []
+            'color_options' : [],
+            'show_sucess' : false
         }
     },
     methods: {
-        async loadColors() {
+        async loadCar() {
             this.$vs.loading();
-            let res = await axios.get('/api/colors');
-            // console.log(res);
-            this.color_options = res.data;
+            let id = this.$route.params.id;
+            let res = await axios.get(`/api/cars/${id}`);
+            let car = res.data;
+            this.form = car;
             this.$vs.loading.close();
         },
         submit() {
             var form_data = new FormData();
-            
+
             for(var field in this.form){
                 form_data.set(field,this.form[field]);
             }
-            
+
             axios({
                 method: 'post',
-                url: '/api/cars/create',
+                url: `/api/cars/edit/${this.$route.params.id}`,
                 data: form_data,
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }).then(function (response) {
+            }).then((response) => {
                 console.log(response);
+                this.loadColors();
+                this.loadCar();
+                this.show_sucess = true;
             })
         },
         onFileChange(e) {

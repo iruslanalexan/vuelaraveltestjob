@@ -20,9 +20,10 @@ export default new VueRouter({
       component: CreateForm
     },
     {
-      path: '/edit',
+      path: '/edit/:id',
       name: 'edit',
-      component: EditForm
+      component: EditForm,
+      props: true
     }
   ]
 })

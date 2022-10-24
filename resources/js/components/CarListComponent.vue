@@ -2,8 +2,8 @@
   <vs-row>
       <vs-card>
         <transition-group name="list" tag="p">
-          <vs-col 
-          v-for="item in car_list" 
+          <vs-col
+          v-for="item in car_list"
           v-bind:key="item.id"
           type="flex" vs-justify="center" vs-align="center">
               <CarBox class="list-item" v-bind:car="item" v-on:remove="removeCar"/>
@@ -26,7 +26,6 @@ export default {
         this.$vs.loading();
         let res = await axios.get('/api/cars');
         this.car_list = res.data;
-        window.v = this;
         this.$vs.loading.close();
       },
       async removeCar(id){

@@ -5,7 +5,7 @@
               <h3>Создание записи автомобиля:</h3>
               <b-container>
                 <b-form ref="v-form">
-                    <b-form-row>  
+                    <b-form-row>
 
                         <b-col>
                             <b-form-group  label="Название модели:" label-for="input-1">
@@ -20,7 +20,7 @@
 
                     </b-form-row>
 
-                    <b-form-row>  
+                    <b-form-row>
 
                         <b-col>
                             <b-form-group  label="Номер двигателя:" label-for="input-1">
@@ -57,6 +57,9 @@
                     </div>
 
                     <vs-divider />
+
+                    <b-alert v-if="show_sucess" variant="success" show>Запись успешно сохранена!</b-alert>
+
                     <vs-button color="primary" type="filled" v-on:click="submit">Создать</vs-button>
                 </b-form>
               </b-container>
@@ -82,7 +85,8 @@ export default {
         };
         return {
             'form': form_fields,
-            'color_options' : []
+            'color_options' : [],
+            'show_sucess' : false
         }
     },
     methods: {
@@ -95,11 +99,11 @@ export default {
         },
         submit() {
             var form_data = new FormData();
-            
+
             for(var field in this.form){
                 form_data.set(field,this.form[field]);
             }
-            
+
             axios({
                 method: 'post',
                 url: '/api/cars/create',
@@ -107,8 +111,8 @@ export default {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }).then(function (response) {
-                console.log(response);
+            }).then( (response) => {
+                this.show_sucess = true;
             })
         },
         onFileChange(e) {
@@ -120,6 +124,7 @@ export default {
     },
     mounted() {
         this.loadColors();
+        window.createForm = this;
     }
 }
 </script>
